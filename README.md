@@ -8,6 +8,8 @@ Infonet Power requires [Node.js](https://nodejs.org/) and [Electron](https://www
 ```sh
 npm start
 ```
+3) To view logging on windows enter set ```ELECTRON_ENABLE_LOGGING=true```
+
 Note: to open the developer menu press `Control + Shift + I` or `Command + Shift + I`
 ### Additional Info
 The list of prices to grab is located in the PriceGrabber.js file.
