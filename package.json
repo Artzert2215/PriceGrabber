@@ -1,0 +1,14 @@
+{
+  "name": "build",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "ikke",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^10.1.1"
+  }
+}
