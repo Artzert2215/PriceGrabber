@@ -53,18 +53,25 @@ function sendJS(js) {
   curWindow.webContents.executeJavaScript(js)
 }
 
-/*
-sites with their methods
-autovoorkinderen.nl -> 1
-bol.com -> 2
-omidbikes.nl -> 3
-*/
+var shippingdb = [
+  ["method1", 0], //autovoorkinderen.nl
+  ["method2", 0], //bol.com
+  ["method3", 0], //omidbikes.nl
+  ["method4", 0], //cars4kids.nl
+  ["method5", 0], //marcelinashop.com
+  ["method6", 0], //djimmi.nl
+  ["method7", 0], //elektrische-kinderauto.nl
+]
 
 var urldatabase = [
   //mercedes-elektrische-kinderauto-glc-coupe-wit
   ["https://www.autovoorkinderen.nl/mercedes-elektrische-kinderauto-glc-coupe-wit", "method1", "mercedes-elektrische-kinderauto-glc-coupe-wit"], 
   ["https://www.bol.com/nl/nl/p/mercedes-elektrische-kinderauto-glc-coupe-wit/9300000040191508/", "method2", "mercedes-elektrische-kinderauto-glc-coupe-wit"],
   ["https://omidbikes.nl/product/kindervoertuigen/kinderaccu-auto/mercedes-benz/mercedes-benz-glc-63s-2-persoons-wit-12v-mp4-tv-leder/", "method3", "mercedes-elektrische-kinderauto-glc-coupe-wit"],
+  ["https://www.cars4kids.nl/product/elektrische-accu-auto-mercedes-amg-glc-wit/", "method4", "mercedes-elektrische-kinderauto-glc-coupe-wit"],
+  ["https://www.marcelinashop.com/assortiment/artikel/171/elektrische-kinderauto-mercedes-glc-63s-4x4-.html", "method5", "mercedes-elektrische-kinderauto-glc-coupe-wit"],
+  ["https://www.djimmi.nl/mercedes-glc-coupe-wit-elektrische-kinderauto.html", "method6", "mercedes-elektrische-kinderauto-glc-coupe-wit"],
+  ["https://elektrische-kinderauto.nl/mercedes-gls63-amg-kinderauto-mat-zwart/", "method7", "mercedes-elektrische-kinderauto-glc-coupe-wit"],
 ]
 
 var results = []
@@ -109,9 +116,93 @@ function run(num) {
           return null;
         }
 
-        var papa = document.getElementsByClassName("entry-summary")[0]
+        var papa = document.getElementsByClassName("entry-summary")[0];
         var children = papa.children;
-        var chosenone = findclass("price", children)
+        var chosenone = findclass("price", children);
+        price = chosenone.textContent.substring(1);
+        console.log(price);
+        window.api.send("price-upd", price);`
+      )
+    } else if (method == "method4") {
+      sendJS(
+        `
+        function findclass(classNamel, collection) {
+          var elementsArray = [].slice.call(collection);
+          for (var index = 0; index < elementsArray.length; index++) {
+            var element = elementsArray[index];
+            if (element.className == classNamel) {
+              return element;
+            }
+          }
+          return null;
+        }
+
+        var papa = document.getElementById("seox-add-to-cart");
+        var children = papa.children;
+        var chosenone = findclass("price", children);
+        price = chosenone.textContent.substring(6);
+        console.log(price);
+        window.api.send("price-upd", price);`
+      )
+    } else if (method == "method5") {
+      sendJS(
+        `
+        function findclass(classNamel, collection) {
+          var elementsArray = [].slice.call(collection);
+          for (var index = 0; index < elementsArray.length; index++) {
+            var element = elementsArray[index];
+            if (element.className == classNamel) {
+              return element;
+            }
+          }
+          return null;
+        }
+
+        var papa = document.getElementsByClassName("Shop01detailpricewrapper")[0];
+        var children = papa.children;
+        var chosenone = findclass("detail-new-pricewrapper", children);
+        price = chosenone.textContent.substring(2);
+        console.log(price);
+        window.api.send("price-upd", price);`
+      )
+    } else if (method == "method6") {
+      sendJS(
+        `
+        function findclass(classNamel, collection) {
+          var elementsArray = [].slice.call(collection);
+          for (var index = 0; index < elementsArray.length; index++) {
+            var element = elementsArray[index];
+            if (element.className == classNamel) {
+              return element;
+            }
+          }
+          return null;
+        }
+
+        var papa = document.getElementsByClassName("col-xs-12")[0];
+        var children = papa.children;
+        var chosenone = findclass("price margin-right-10", children);
+        price = chosenone.textContent.substring(1);
+        console.log(price);
+        window.api.send("price-upd", price);`
+      )
+    } else if (method == "method7") {
+      sendJS(
+        `
+        function findclass(classNamel, collection) {
+          var elementsArray = [].slice.call(collection);
+          for (var index = 0; index < elementsArray.length; index++) {
+            var element = elementsArray[index];
+            if (element.className == classNamel) {
+              return element;
+            }
+          }
+          return null;
+        }
+
+        var papa = document.getElementsByClassName("entry-summary")[0];
+        var children = papa.children;
+        var chosenone = findclass("price-wrapper", children);
         price = chosenone.textContent.substring(1);
         console.log(price);
         window.api.send("price-upd", price);`
